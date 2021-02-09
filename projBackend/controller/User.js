@@ -13,7 +13,14 @@ exports.getUserById = (req, res, next, id) => {
 };
 
 exports.getUser = (req, res) => {
-  req.profile.salt = undefined;
-  req.profile.encry_password = undefined;
-  return res.json(req.profile);
+  var user = User.findById({_id: req.profile._id})
+    .populate("notes")
+    .exec((err, user) => {
+      if (err) {
+        return res.status(400).json({error: "Can't find the user!"});
+      }
+      user.salt = undefined;
+      user.encry_password = undefined;
+      return res.json(user);
+    });
 };

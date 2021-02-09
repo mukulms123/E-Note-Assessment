@@ -2,12 +2,12 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 //Importing Routes
 const authRoutes = require("./routes/Auth");
 const userRoutes = require("./routes/User");
+const noteRoutes = require("./routes/Note");
 
 //Decalring APP as an express app
 const app = express();
@@ -16,7 +16,6 @@ const PORT = process.env.PORT || 8000;
 //Middlewares
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors());
 
 //Mongoose Connection
 //TODO: Add MongoDB database's connection link
@@ -37,6 +36,7 @@ mongoose
 //Using routes
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
+app.use("/api", noteRoutes);
 
 //listening to PORT
 app.listen(PORT, () => {

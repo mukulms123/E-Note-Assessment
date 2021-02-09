@@ -72,7 +72,6 @@ exports.isSignedIn = expressJwt({
 
 exports.isAuthenticated = (req, res, next) => {
   let checker = req.profile && req.auth && req.profile._id == req.auth._id;
-  console.log("PROFILE: ", req.profile);
   if (!checker) {
     return res.status(400).json({error: "User is not authenticted"});
   }

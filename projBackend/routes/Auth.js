@@ -8,7 +8,7 @@ const {
 } = require("../controller/Auth");
 const router = express.Router();
 const User = require("../models/User");
-const {getUserById, getUser} = require("../controller/User");
+const {getUserById} = require("../controller/User");
 const {check} = require("express-validator");
 
 router.param("userId", getUserById);
