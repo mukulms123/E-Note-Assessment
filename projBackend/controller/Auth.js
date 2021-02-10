@@ -26,6 +26,7 @@ exports.signup = (req, res) => {
 
 //controller for Signin
 exports.signin = (req, res) => {
+  console.log("Signin initialized");
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return res.status(400).json({error: error.array()[0].msg});

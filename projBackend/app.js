@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 //Importing Routes
 const authRoutes = require("./routes/Auth");
@@ -16,6 +17,7 @@ const PORT = process.env.PORT || 8000;
 //Middlewares
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(cors());
 
 //Mongoose Connection
 //TODO: Add MongoDB database's connection link
