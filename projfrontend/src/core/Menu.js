@@ -1,7 +1,7 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {Navbar, Nav} from "react-bootstrap";
-import {useHistory} from "react-router-dom";
-import {isAuthenticated} from "./helper/auth";
+import {useHistory, Redirect} from "react-router-dom";
+import {isAuthenticated, signout} from "../auth/helper/auth";
 
 const currentTab = (history, path) => {
   if (history.location.pathname === path) {
@@ -24,21 +24,41 @@ const Menu = () => {
         <Nav.Link href="/">
           <div className={currentTab(history, "/")}>Home</div>
         </Nav.Link>
-        <Nav.Link href="/signin">
-          <div className={currentTab(history, "/signin")}>Signin</div>
-        </Nav.Link>
-        <Nav.Link href="/signup">
-          <div className={currentTab(history, "/signup")}>Signup</div>
-        </Nav.Link>
+        {!isAuthenticated() && (
+          <Fragment>
+            <Nav.Link href="/signin">
+              <div className={currentTab(history, "/signin")}>Signin</div>
+            </Nav.Link>
+            <Nav.Link href="/signup">
+              <div className={currentTab(history, "/signup")}>Signup</div>
+            </Nav.Link>
+          </Fragment>
+        )}
+        {isAuthenticated() && (
+          <Fragment>
+            <Nav.Link
+              href="/signin"
+              onClick={() => {
+                signout(() => {
+                  <Redirect to="/signin" />;
+                });
+              }}
+            >
+              <div className="text-danger">Signout</div>
+            </Nav.Link>
+          </Fragment>
+        )}
       </Nav>
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
           {isAuthenticated() ? (
-            <div>
+            <Fragment>
               Signed in as: <a href="#login">{isAuthenticated().user.name}</a>
-            </div>
+            </Fragment>
           ) : (
-            <div className="text-warning">Not Singed in</div>
+            <Fragment>
+              <div className="text-warning">Not Singed in</div>
+            </Fragment>
           )}
         </Navbar.Text>
       </Navbar.Collapse>

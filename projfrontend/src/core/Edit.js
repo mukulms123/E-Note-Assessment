@@ -1,37 +1,47 @@
 import React, {useState, useEffect} from "react";
 import {Card, Accordion, Form, Button, Alert} from "react-bootstrap";
+import {Redirect, useHistory as history} from "react-router-dom";
 import Base from "./Base";
 import {isAuthenticated} from "../auth/helper/auth";
-import {createNote, getNotes} from "./helper/note";
+import {updateNote, getNote} from "./helper/note";
+import {useParams} from "react-router-dom";
 
-const Home = () => {
+const Edit = () => {
   const [values, setValues] = useState({
     title: "",
     content: "",
     file: false,
     error: false,
     success: false,
+    redirect: false,
     formData: new FormData(),
   });
-  var {title, content, file, error, success, formData} = values;
+  var {title, content, file, error, success, formData, redirect} = values;
+
+  const {id} = useParams();
 
   const user = isAuthenticated() && isAuthenticated().user;
   const token = isAuthenticated() && isAuthenticated().token;
 
-  const [notes, setNotes] = useState([]);
-
-  const fetchNotes = () => {
-    return getNotes(user._id, token).then((data) => {
+  const fetchNote = () => {
+    return getNote(user._id, token, id).then((data) => {
       if (data.error) {
-        setValues({...values, error: "Can't fetch all notes"});
+        setValues({...values, error: data.error});
       }
-      setNotes(data.notes);
+      formData.set("title", data.title);
+      formData.set("content", data.content);
+      setValues({
+        ...values,
+        title: data.title,
+        content: data.content,
+        filename: data.filename,
+      });
     });
   };
 
   useEffect(() => {
-    fetchNotes();
-  }, [success]);
+    fetchNote();
+  }, []);
 
   const handleChange = (name) => (event) => {
     const value = name === "file" ? event.target.files[0] : event.target.value;
@@ -42,7 +52,7 @@ const Home = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     setValues({...values, error: false});
-    createNote(user._id, token, formData).then((data) => {
+    updateNote(user._id, token, id, formData).then((data) => {
       if (data.error) {
         setValues({...values, error: data.error});
       }
@@ -52,6 +62,7 @@ const Home = () => {
         error: false,
         content: "",
         success: data.title,
+        redirect: true,
       });
     });
   };
@@ -64,7 +75,13 @@ const Home = () => {
 
   const successAlert = () => {
     if (success) {
-      return <Alert variant="danger">Note created: {success}</Alert>;
+      return <Alert variant="danger">Note updated: {success}</Alert>;
+    }
+  };
+
+  const performRedirect = () => {
+    if (redirect) {
+      return <Redirect to={`/note/${id}`} />;
     }
   };
 
@@ -123,44 +140,18 @@ const Home = () => {
     );
   };
 
-  //get Notes on right side
-  const getAllNotesList = () => {
-    return (
-      <Accordion defaultActiveKey="-1">
-        <Card>
-          <Accordion.Toggle as={Card.Header} eventKey="0">
-            <b>Your Notes</b>
-          </Accordion.Toggle>
-        </Card>
-        {notes.map((note, index) => {
-          console.log(note.title, index);
-          return (
-            <Card>
-              <Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-                <a href={`/note/${note._id}`}>{note.title}</a>
-              </Accordion.Toggle>
-              <Accordion.Collapse eventKey={index + 1}>
-                <Card.Body>{note.content.substring(0, 30)}</Card.Body>
-              </Accordion.Collapse>
-            </Card>
-          );
-        })}
-      </Accordion>
-    );
-  };
-
   return (
-    <Base title="Home Page" description="Lets create some new Notes">
+    <Base title="Update" description="Adding new File will replace old file.">
       <div className="row align-item-center ">
-        <div className="col-md-7 bg-light mx-auto">
+        <div className="col-md-8 bg-light mx-auto">
           {errorAlert()}
           {successAlert()}
           {NoteForm()}
+          {performRedirect()}
         </div>
-        <div className="col-3 bg-light mx-auto">{getAllNotesList()}</div>
       </div>
     </Base>
   );
 };
 
-export default Home;
+export default Edit;

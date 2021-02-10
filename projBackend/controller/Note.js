@@ -5,7 +5,7 @@ const fs = require("fs");
 //get Notes by id, used in router params
 exports.getNoteById = (req, res, next, id) => {
   Note.findOne({_id: id}, (err, note) => {
-    if (err) {
+    if (err || !note) {
       return res.status(400).json({error: "Can't fetch Note from database"});
     }
     note.content = undefined;
@@ -28,7 +28,7 @@ exports.isOwner = (req, res, next) => {
 //Retrieves a single note
 exports.getNote = (req, res) => {
   Note.findOne({_id: req.note._id}, (err, note) => {
-    if (err) {
+    if (err || !note) {
       return res.status(400).json({error: "Can't fetch Note from database"});
     }
     return res.status(200).json(note);
@@ -89,7 +89,7 @@ exports.updateNote = (req, res) => {
     note.filename = filename;
   }
   note.save((err, note) => {
-    if (err) {
+    if (err || !note) {
       return res
         .status(400)
         .json({error: "Wasn't able to save updated note in DB."});
@@ -105,7 +105,7 @@ exports.deleteNote = (req, res) => {
       return res.status(400).json({error: "Couldn't delete the note!"});
     }
     User.findById({_id: req.profile._id}, (err, user) => {
-      if (err) {
+      if (err || !user) {
         return res
           .status(400)
           .json({error: "Couldn't delete note's data from user!"});
@@ -115,7 +115,7 @@ exports.deleteNote = (req, res) => {
         return note != deletedNote._id;
       });
       user.save((err, user) => {
-        if (err) {
+        if (err || !user) {
           return res
             .status(400)
             .json({error: "There was some error while updating user"});

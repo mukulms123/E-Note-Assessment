@@ -10,9 +10,14 @@ const noteSchema = new mongoose.Schema(
     },
     content: {
       type: String,
+      trim: false,
     },
     filename: {
       type: String,
+    },
+    create_At: {
+      type: Date,
+      default: new Date(),
     },
     owner: {
       id: {

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Base from "./Base";
+import Base from "../core/Base";
 import {Form, Button, Alert} from "react-bootstrap";
 import {signup, isAuthenticated, authenticate} from "./helper/auth";
 import {Redirect} from "react-router-dom";

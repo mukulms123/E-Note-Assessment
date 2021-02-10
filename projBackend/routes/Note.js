@@ -1,4 +1,5 @@
 const express = require("express");
+const Note = require("../models/Note");
 const {isSignedIn, isAuthenticated} = require("../controller/Auth");
 const router = express.Router();
 const {getUserById} = require("../controller/User");
@@ -45,6 +46,33 @@ router.post(
   createNote
 );
 
+// router.get("/note/:userId/count", function (req, res) {
+//   var user = req.params.userId;
+//   var currDate = new Date();
+//   var endDate = new Date();
+//   endDate.setTime(endDate.getDate() - 7);
+//   console.log("Current: ", currDate);
+//   console.log("END: ", endDate);
+//   Note.countDocuments(
+//     {
+//       createdAt: {
+//         $gte: endDate,
+//         $lt: currDate,
+//       },
+//       owner: {
+//         id: user,
+//       },
+//     },
+//     (err, data) => {
+//       if (err) {
+//         return res.status(400).json({error: err});
+//       }
+//       console.log(data);
+//       return res.json(data);
+//     }
+//   );
+// });
+
 //Route to get a Note
 router.get(
   "/note/:noteId/:userId",
@@ -55,13 +83,8 @@ router.get(
 );
 
 //Download file route for user
-router.get(
-  "/note/:noteId/file/:userId",
-  isSignedIn,
-  isAuthenticated,
-  isOwner,
-  getFile
-);
+//TODO: Here is the error
+router.get("/note/:noteId/file/:userId", getFile);
 
 //Put request to update notes
 router.put(
