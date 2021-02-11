@@ -150,7 +150,10 @@ const Home = () => {
   };
 
   return (
-    <Base title="Home Page" description="Lets create some new Notes">
+    <Base
+      title={`Welcome ${user.name}`}
+      description="Lets create some new Notes"
+    >
       <div className="row align-item-center ">
         <div className="col-md-7 bg-light mx-auto">
           {errorAlert()}

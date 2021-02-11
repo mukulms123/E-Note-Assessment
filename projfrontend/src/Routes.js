@@ -1,6 +1,5 @@
 import React from "react";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
-import {authenticate} from "./auth/helper/auth";
 import Home from "./core/Home";
 import Signin from "./auth/Signin";
 import Note from "./core/Note";
