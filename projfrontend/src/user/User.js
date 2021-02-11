@@ -59,7 +59,7 @@ const User = () => {
       date = new Date(date);
       var endDate = new Date();
       endDate.setDate(endDate.getDate() - 7);
-      endDate.setHours(0, 0, 0);
+      endDate.setHours(23, 59, 59);
       if (endDate <= date) {
         createdArr.push(date);
       }
@@ -76,7 +76,7 @@ const User = () => {
     });
 
     //adding 0 records to finalArr
-    for (var i = 7; i > 0; i--) {
+    for (var i = 6; i >= 0; i--) {
       var date = new Date();
       date.setDate(date.getDate() - i);
       date = date.toString().substring(0, 10);
@@ -84,7 +84,7 @@ const User = () => {
     }
 
     var dummyArr = [];
-    for (var i = 7; i > 0; i--) {
+    for (var i = 6; i >= 0; i--) {
       var date = new Date();
       date.setDate(date.getDate() - i);
       date = date.toString().substring(0, 10);
