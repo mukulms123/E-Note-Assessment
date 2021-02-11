@@ -104,8 +104,10 @@ exports.deleteNote = (req, res) => {
     if (err) {
       return res.status(400).json({error: "Couldn't delete the note!"});
     }
-    var path = "./uploads/" + deletedNote.filename;
-    fs.unlinkSync(path);
+    if (deletedNote.filename !== undefined) {
+      var path = "./uploads/" + deletedNote.filename;
+      fs.unlinkSync(path);
+    }
     User.findById({_id: req.profile._id}, (err, user) => {
       if (err || !user) {
         return res
