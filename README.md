@@ -44,3 +44,6 @@ Node.js
 npm
 MongoDb
 ```
+
+## Postman Collections for main APIs
+[Note-collection](https://github.com/mukulms123/E-Note-Assessment/blob/main/Notes.postman_collection.json)
