@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "f729696c-e379-4a8f-afe8-af736042df49",
+		"name": "Notes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Mukul\",\r\n    \"lastname\": \"Singh\",\r\n    \"email\":\"mukul@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"mukul@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDIyZDY3ZTYyMDFhYTM0NmMxMGZiZDYiLCJpYXQiOjE2MTI4OTU4Nzd9.Sf-NetA4fFyta7yNT1Kdo2aMGE6WDT4k6gSe6iulwjg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/user/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create note",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDIyZDY3ZTYyMDFhYTM0NmMxMGZiZDYiLCJpYXQiOjE2MTI4OTU4Nzd9.Sf-NetA4fFyta7yNT1Kdo2aMGE6WDT4k6gSe6iulwjg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Fsadfgnhgfds",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "jsfhsadufhsdoifdshfuhsdfdsfjhdfjdnidascnebyrnei fjhfygdhncbvgyufidjcmnvbhgufijdkmcnhfgyufidjskmnhff",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Mukul/Desktop/Resume- Mukul Singh.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/note/create/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"note",
+						"create",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get note ",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDIyZDY3ZTYyMDFhYTM0NmMxMGZiZDYiLCJpYXQiOjE2MTI4OTU4Nzd9.Sf-NetA4fFyta7yNT1Kdo2aMGE6WDT4k6gSe6iulwjg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/note/{{noteId}}/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"note",
+						"{{noteId}}",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update note",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDIyZDY3ZTYyMDFhYTM0NmMxMGZiZDYiLCJpYXQiOjE2MTI4OTU4Nzd9.Sf-NetA4fFyta7yNT1Kdo2aMGE6WDT4k6gSe6iulwjg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "First Form",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "This time content is updated.",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/F:/Resume/Resume-Mukul Singh-complete.pdf",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/note/{{noteId}}/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"note",
+						"{{noteId}}",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Note",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDIyZDY3ZTYyMDFhYTM0NmMxMGZiZDYiLCJpYXQiOjE2MTI4OTU4Nzd9.Sf-NetA4fFyta7yNT1Kdo2aMGE6WDT4k6gSe6iulwjg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/note/{{noteId}}/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"note",
+						"{{noteId}}",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "userId",
+			"value": "6022d67e6201aa346c10fbd6"
+		},
+		{
+			"key": "noteId",
+			"value": "6022d6edc233f306008d2a10"
+		}
+	]
+}
