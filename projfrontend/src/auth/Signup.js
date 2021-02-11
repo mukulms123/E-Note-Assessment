@@ -100,8 +100,8 @@ const Signup = () => {
     if (redirect) {
       return (
         <Alert variant="primary">
-          User was registered successfully. Please goto Signin
-          <Alert.Link href="/signin">. Let's Go</Alert.Link>
+          User was registered successfully. Please goto Signin.
+          <Alert.Link href="/signin"> Let's Go</Alert.Link>
         </Alert>
       );
     }

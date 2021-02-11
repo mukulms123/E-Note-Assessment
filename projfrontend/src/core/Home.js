@@ -132,19 +132,21 @@ const Home = () => {
             <b>Your Notes</b>
           </Accordion.Toggle>
         </Card>
-        {notes.map((note, index) => {
-          console.log(note.title, index);
-          return (
-            <Card>
-              <Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-                <a href={`/note/${note._id}`}>{note.title}</a>
-              </Accordion.Toggle>
-              <Accordion.Collapse eventKey={index + 1}>
-                <Card.Body>{note.content.substring(0, 30)}</Card.Body>
-              </Accordion.Collapse>
-            </Card>
-          );
-        })}
+        {notes
+          ? notes.map((note, index) => {
+              console.log(note.title, index);
+              return (
+                <Card>
+                  <Accordion.Toggle as={Card.Header} eventKey={index + 1}>
+                    <a href={`/note/${note._id}`}>{note.title}</a>
+                  </Accordion.Toggle>
+                  <Accordion.Collapse eventKey={index + 1}>
+                    <Card.Body>{note.content.substring(0, 30)}</Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              );
+            })
+          : ""}
       </Accordion>
     );
   };

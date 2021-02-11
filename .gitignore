@@ -1,2 +1,3 @@
 /projBackend/node_modules
+/projBackend/uploads/**
 /projfrontend/node_modules
