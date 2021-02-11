@@ -7,6 +7,7 @@ import Note from "./core/Note";
 import Signup from "./auth/Signup";
 import AuthenticatedRoute from "./helper/AuthenticatedRoute";
 import Edit from "./core/Edit";
+import User from "./user/User";
 
 const Routes = () => {
   return (
@@ -17,6 +18,7 @@ const Routes = () => {
         <Route path="/signin" exact component={Signin} />
         <AuthenticatedRoute path="/note/:id" exact component={Note} />
         <AuthenticatedRoute path="/note/update/:id" exact component={Edit} />
+        <AuthenticatedRoute path="/user/:id/dashboard" exct component={User} />
       </Switch>
     </BrowserRouter>
   );

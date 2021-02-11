@@ -84,7 +84,7 @@ const Signup = () => {
           <Form.Check type="checkbox" label="I am feeling lucky today!" />
         </Form.Group>
         <Button variant="primary" onClick={onSubmit} type="submit">
-          Submit
+          Signup
         </Button>
       </Form>
     );

@@ -21,9 +21,6 @@ const Menu = () => {
       <Navbar.Brand href="/">E-note</Navbar.Brand>
       <Navbar.Toggle />
       <Nav className="mr-auto">
-        <Nav.Link href="/">
-          <div className={currentTab(history, "/")}>Home</div>
-        </Nav.Link>
         {!isAuthenticated() && (
           <Fragment>
             <Nav.Link href="/signin">
@@ -36,6 +33,9 @@ const Menu = () => {
         )}
         {isAuthenticated() && (
           <Fragment>
+            <Nav.Link href="/">
+              <div className={currentTab(history, "/")}>Home</div>
+            </Nav.Link>
             <Nav.Link
               href="/signin"
               onClick={() => {
@@ -53,7 +53,17 @@ const Menu = () => {
         <Navbar.Text>
           {isAuthenticated() ? (
             <Fragment>
-              Signed in as: <a href="#login">{isAuthenticated().user.name}</a>
+              <span
+                tabindex="0"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="Dashboard"
+              >
+                Signed in as:{" "}
+                <a href={`/user/${user._id}/dashboard`}>
+                  {isAuthenticated().user.name}
+                </a>
+              </span>
             </Fragment>
           ) : (
             <Fragment>

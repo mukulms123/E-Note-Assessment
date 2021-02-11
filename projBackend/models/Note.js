@@ -15,10 +15,6 @@ const noteSchema = new mongoose.Schema(
     filename: {
       type: String,
     },
-    create_At: {
-      type: Date,
-      default: new Date(),
-    },
     owner: {
       id: {
         type: mongoose.Schema.Types.ObjectId,
